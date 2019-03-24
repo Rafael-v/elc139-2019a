@@ -86,7 +86,7 @@ int main(int argc, char **argv)
    // Calcula c = a . b em nthreads, medindo o tempo
    start_time = wtime();
    #pragma omp parallel num_threads(nthreads)
-   dotprod_worker(nthreads);
+   dotprod_worker();
    end_time = wtime();
 
    // Mostra resultado e estatisticas da execucao
