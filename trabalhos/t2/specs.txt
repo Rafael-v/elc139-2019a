@@ -1,0 +1,3 @@
+Processador: Intel® Core™ i5 7200U (2.5 GHz até 3.1 GHz, 3 MB L3 Cache) com 2 núcleos, 4 threads
+Memória: 8 GB
+Sistema Operacional: Linux Mint 19.1
