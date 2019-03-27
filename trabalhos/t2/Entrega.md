@@ -10,6 +10,42 @@ Disciplina: ELC139 - Programação Paralela
 
 1. Explique como se encontram implementadas as 4 etapas de projeto: particionamento, comunicação, aglomeração, mapeamento (use trechos de código para ilustrar a explicação).
 
+    - **Particionamento:** Essa parte é onde ocorre a divisão da tarefa entre as threads para aproveitar ao máximo o paralelismo. Nesse programa, isso é feito no seguinte trecho de código:
+
+    ```
+    long offset = (long) arg;
+    double *a = dotdata.a;
+    double *b = dotdata.b;
+    int wsize = dotdata.wsize;
+    int start = offset*wsize;
+    int end = start + wsize;
+    ```
+    Esse trecho se encontra na função *dotprod_worker* que recebe o argumento *arg*, correspondendo ao id da thread que está executando, assim cada thread terá um valor para *arg* e consequentemente um *offset* diferente. Dessa maneira, é possível delimitar um intervalo que cada thread executará, utilizando o *offset* e o tamanho do intervalo *wsize* para definir o início e final, como calculado nas duas últimas linhas do trecho.
+
+    - **Comunicação:** A comunicação é feita no seguinte trecho de código:
+    ```
+    pthread_mutex_lock (&mutexsum);
+    dotdata.c += mysum;
+    pthread_mutex_unlock (&mutexsum);
+    ```
+    A variável *dotdata* e *mutexsum* são compartilhados por todas as threads, sendo em *dotdata.c* armazenado o resultado obtido pelos calculos de cada uma. O *mutexsum* ajuda na sincronização.
+
+    - **Aglomeração:** Serve para reduzir as comunicações. Nesse código é feito no seguinte trecho:
+    ```
+    for (i = start; i < end ; i++)  {
+        mysum += (a[i] * b[i]);
+    }
+    ```
+    Onde cada thread faz os cálculos do seu intervalo afim de obter um resultado parcial que será juntado com o das outras threads mais pra frente, no trecho mostrado na comunicação.
+
+    - **Mapeamento:** Aqui é feito um balanceamento da tarefa entre as threads, estático nesse programa. Mostrado no trecho a seguir:
+    ```
+    for (i = 0; i < nthreads; i++) {
+        pthread_create(&threads[i], &attr, dotprod_worker, (void *) i);
+    }
+    ```
+    Cada thread é criada e fica responsável por um intervalo de cálculo de tamanho igual para todas (estático), definido pelo seu indice que servirá de offset, como visto no trecho do particionamento.
+
 2. Considerando o tempo (em microssegundos) mostrado na saída do programa, qual foi a aceleração (speedup) com o uso de threads?
 
     ```
