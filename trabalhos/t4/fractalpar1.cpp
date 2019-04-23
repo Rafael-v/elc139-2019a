@@ -27,6 +27,8 @@ Parallelized by Rafael Vales
 #include <math.h>
 #include "fractal.h"
 
+#define THREADS 4
+
 static const double Delta = 0.001;
 static const double xMid =  0.23701;
 static const double yMid =  0.521;
@@ -36,15 +38,15 @@ int main(int argc, char *argv[])
   printf("Fractal v1.6 [serial]\n");
 
   // check command line
-  if (argc != 4) {fprintf(stderr, "usage: %s frame_width num_frames num_threads\n", argv[0]); exit(-1);}
+  if (argc != 3 && argc != 4) {fprintf(stderr, "usage: %s frame_width num_frames [num_threads]\n", argv[0]); exit(-1);}
   int width = atoi(argv[1]);
   if (width < 10) {fprintf(stderr, "error: frame_width must be at least 10\n"); exit(-1);}
   int frames = atoi(argv[2]);
   if (frames < 1) {fprintf(stderr, "error: num_frames must be at least 1\n"); exit(-1);}
-  int threads = atoi(argv[3]);
+  int threads = (argc == 4) ? atoi(argv[3]) : THREADS;
   if (threads < 1) {fprintf(stderr, "error: num_threads must be at least 1\n"); exit(-1);}
   printf("computing %d frames of %d by %d fractal with %d threads\n", frames, width, width, threads);
-
+  
   // allocate picture array
   unsigned char* pic = new unsigned char[frames * width * width];
 
