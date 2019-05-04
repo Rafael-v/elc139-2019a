@@ -3,11 +3,8 @@
 #include <time.h>
 #include "mpi.h"
 
-#define WORKSIZE 125000
+#define WORKSIZE 1000000
 #define REPETITIONS 2000
-
-#define TIME 0
-#define SUM  1
 
 long wtime(){
 
@@ -18,7 +15,7 @@ long wtime(){
 
 int main(int argc, char **argv) {
 
-   int pid, np, tag = 0;
+   int pid, np = 4, tag = 0;
    MPI_Status status;
 
    MPI_Init(&argc, &argv);
@@ -48,26 +45,21 @@ int main(int argc, char **argv) {
          mysum += (a[i] * b[i]);
       }
    }
-   long end_time = wtime();
 
    if (pid == 0) {
       int source;
       double sum, totalsum = mysum;
-      long time, totaltime = (long)(end_time - start_time);
 
       for (source = 1; source < np; source++) {
-         MPI_Recv(&sum, 1, MPI_DOUBLE, source, SUM, MPI_COMM_WORLD, &status);
+         MPI_Recv(&sum, 1, MPI_DOUBLE, source, 0, MPI_COMM_WORLD, &status);
          totalsum += sum;
-         MPI_Recv(&time, 1, MPI_LONG, source, TIME, MPI_COMM_WORLD, &status);
-         totaltime += time;
       }
 
+      long end_time = wtime();
       printf("%f\n", totalsum);
-      printf("%d process(es), %ld usec\n", np, totaltime);
+      printf("%d process(es), %ld usec\n", np, (long)(end_time - start_time));
    } else {
-      long time = (long)(end_time - start_time);
-      MPI_Send(&mysum, 1, MPI_DOUBLE, 0, SUM, MPI_COMM_WORLD);
-      MPI_Send(&time, 1, MPI_LONG, 0, TIME, MPI_COMM_WORLD);
+      MPI_Send(&mysum, 1, MPI_DOUBLE, 0, 0, MPI_COMM_WORLD);
    }
 
    free(a);
