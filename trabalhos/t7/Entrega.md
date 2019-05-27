@@ -12,11 +12,11 @@ Plataforma: [specs.txt](../t2/specs.txt)
 
 O código desenvolvido para os testes pode ser encontrado em [parte1.c](parte1.c).
 
-<img src="/images/graph2000repetitions.png" width="500">
+<img src="./images/graph2000repetitions.png" width="500">
 
-<img src="/images/graph4000repetitions.png" width="500">
+<img src="./images/graph4000repetitions.png" width="500">
 
-<img src="/images/graph8000repetitions.png" width="500">
+<img src="./images/graph8000repetitions.png" width="500">
 
 Quando o número de processos cresce, consequentemente aumenta o número de envios e recebimentos da mensagem, e também o tempo de execução. O tempo foi obtido a partir da média de 10 execuções com tal configuração.
 
