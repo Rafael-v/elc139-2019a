@@ -24,7 +24,17 @@ A tabela com os resultados desses gráficos pode ser vista em [results_p1.csv](r
 
 ## Parte 2
 
-<img src="https://i.imgur.com/2JrKfXU.png" width="500">
+<img src="./images/graph1mbps1000us.png" width="500">
+
+<img src="./images/graph1mbps1us.png" width="500">
+
+<img src="./images/graph1gbps1000us.png" width="500">
+
+<img src="./images/graph1mbps1us.png" width="500">
+
+A variação do tamanho do vetor entre 100 e 3000 não pôde ser percebida no tempo de execução.
+
+A tabela com os resultados desses gráficos pode ser vista em [results_p2.csv](results_p2.csv).
 
 ## Referências
 
