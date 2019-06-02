@@ -10,7 +10,7 @@ Plataforma: [specs.txt](../t2/specs.txt)
 
 ## Parte 1
 
-O código desenvolvido para os testes pode ser encontrado em [parte1.c](parte1.c).
+O código desenvolvido para os testes pode ser encontrado em [parte1.c](parte1.c). Nele foi adicionado um laço de repetição que faz o envio repetidas vezes para obter um maior tempo de execução.
 
 <img src="./images/graph2000repetitions.png" width="500">
 
@@ -24,26 +24,20 @@ A tabela com os resultados desses gráficos pode ser vista em [results_p1.csv](r
 
 ## Parte 2
 
-<img src="./images/graph1mbps1us.png" width="500">
+<img src="./images/grapharray100.png" width="500">
 
-<img src="./images/graph1mbps1000us.png" width="500">
+<img src="./images/grapharray1000.png" width="500">
 
-<img src="./images/graph1mbps10000us.png" width="500">
+<img src="./images/grapharray3000.png" width="500">
 
-<img src="./images/graph1gbps1us.png" width="500">
+A largura de banda variou entre 32, 512 e 2048 Bps, a latência entre 100us e 1s, e o tamanho do vetor entre 100, 1000 e 3000.
 
-<img src="./images/graph1gbps1000us.png" width="500">
-
-<img src="./images/graph1gbps10000us.png" width="500">
-
-A variação do tamanho do vetor entre 100 e 3000 não pôde ser percebida no tempo de execução.
-
-Comparação de todas configurações testadas:
-
-<img src="./images/graphall.png" width="500">
+Como recomendado, em "host-speed" foi utilizado o valor de 6.7 GFLOPs (3.35GFLOPs x 2 cores) encontrado na tabela de CPU performance para o meu processador.
 
 A tabela com os resultados desses gráficos pode ser vista em [results_p2.csv](results_p2.csv).
 
 ## Referências
 
 - Slides. Operações Coletivas em MPI. https://github.com/AndreaInfUFSM/elc139-2019a/tree/master/slides
+- DeinoMPI. MPI_Wtime() function. https://mpi.deino.net/mpi_functions/MPI_Wtime.html
+- SETI@home. CPU performance. https://setiathome.berkeley.edu/cpu_list.php
