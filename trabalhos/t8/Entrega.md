@@ -18,7 +18,7 @@ O código desenvolvido se encontra em [wavecuda1.cu](wavecuda1.cu). Para a anali
 | 1024  800    | 338.5237s |      2.3285s |   145.4 |
 | 1024 1600    | 676.7345s |      4.2005s |   161.1 |
 
-...
+Os tempos de execução para o programa sem paralelismo obtiveram um crescimento linear, começando em 42.4s para 100 frames e duplicando esse valor a medida que os frames também eram duplicados para os testes seguintes. Para o programa onde foi feita a paralelização de cada frame em uma thread, os dois menores valores de frames, 100 e 200, obtiveram tempos de execução muito próximos, ambos na casa dos 600ms. Fazendo o teste com apenas 1 frame foi notado que esse é o tempo mínimo de execução para os valores mais baixos e que começa a subir quando se aproxima dos 200 frames, a partir disso o tempo de execução vai aumentando um pouco menos que o dobro, assim aumentando gradativamente o speedup para imagens com mais quadros. Porém, como o número de threads (que é igual ao número de frames) aumenta exponencialmente, o speedup não consegue acompanhar e a eficiência acaba despencando para valores mais altos.
 
 ## Parte 2
 
