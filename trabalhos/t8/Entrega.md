@@ -22,7 +22,7 @@ Os tempos de execução para o programa sem paralelismo obtiveram um crescimento
 
 ## Parte 2
 
-O segundo programa pode ser visto em [wavecuda2.cu](wavecuda2.cu). Para melhorar o aproveitamento do paralelismo da GPU, foi. As execuções para analise do desempenho foram feitas com variações de tamanho (512, 1024 e 2048) e número de frames (100, 200, 400 e 800). Os tempos obtidos estão na tabela abaixo.
+O segundo programa pode ser visto em [wavecuda2.cu](wavecuda2.cu). Para melhorar o aproveitamento do paralelismo da GPU, foram adicionados multiplos blocos (igual ao tamanho width), assim cada bloco ficou responsável por computar uma linha da imagem, enquanto as threads se mantiveram computando cada frame como na parte 1. As execuções para analise do desempenho foram feitas com variações de tamanho (512, 1024 e 2048) e número de frames (100, 200, 400 e 800). Os tempos obtidos estão na tabela abaixo.
 
 | width frames | wave.cpp  | wavecuda2.cu | speedup  |
 | ------------ | --------- | ------------ | -------- |
@@ -38,9 +38,11 @@ O segundo programa pode ser visto em [wavecuda2.cu](wavecuda2.cu). Para melhorar
 | 2048 200     | 338.4813s |      0.3496s |    968.2 |
 | 2048 400     | 676.6940s |      0.7951s |    851.1 |
 
-...
+Assim como já visto na primeira parte, o tempo de execução do programa sem paralelismo cresceu linearmente. Ao utilizar a técnica de paralelismo com blocos o desempenho melhorou consideravelmente em relação ao programa paralelo da parte 1, como era de se esperar. Ao analisar os tempos obtidos é percebido que o maior speedup está na configuração com menor blocos e threads. Apesar do tempo se manter em menos de 1 segundo para todos testes, a aceleração e eficiência caem a medida que os testes vão sendo feitos em imagens de tamanho e frames maiores.
 
 ## Slides
+
+[slides.pdf](slides.pdf)
 
 ## Ambiente dos testes
 
